@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "427090692867",
+    "firebase_url": "https://missionias-a8a7b.firebaseio.com",
+    "project_id": "missionias-a8a7b",
+    "storage_bucket": "missionias-a8a7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427090692867:android:8ce7c260c753d06b",
+        "android_client_info": {
+          "package_name": "com.example.ayush.missionias"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "427090692867-h3ssff4fmivbmh8bon16p9g7h4un5j65.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ayush.missionias",
+            "certificate_hash": "12a2c9e7e2e2f8220cf37fab6808612b8f09b281"
+          }
+        },
+        {
+          "client_id": "427090692867-0s7iua0p1l0jc1mmdd3hfh7jcndj3pbb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgD5q_lBRGsi9moqhFx4nMdrE_Sn19Xtg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "427090692867-0s7iua0p1l0jc1mmdd3hfh7jcndj3pbb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
