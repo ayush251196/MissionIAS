@@ -11,7 +11,7 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Rate APP" />
+            android:title="Rate App" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
@@ -23,11 +23,11 @@
         <item
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_menu_manage"
-            android:title="I wat to help" />
+            android:title="I want to help" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_menu_manage"
-            android:title="About the app" />
+            android:title="About the App" />
     </group>
 
     <item android:title="Communicate">
