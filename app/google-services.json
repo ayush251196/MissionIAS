@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "427090692867-dh3r6qnrthh3187k9gnm66l9l05dumsa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ayush.missionias",
+            "certificate_hash": "86a39541673326788d5edde19ab181b45452e7c8"
+          }
+        },
+        {
           "client_id": "427090692867-0s7iua0p1l0jc1mmdd3hfh7jcndj3pbb.apps.googleusercontent.com",
           "client_type": 3
         }
