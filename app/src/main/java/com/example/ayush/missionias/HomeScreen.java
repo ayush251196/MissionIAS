@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Iterator;
 
 public class HomeScreen extends AppCompatActivity {
     ArrayList<String> names;
@@ -37,44 +40,24 @@ public class HomeScreen extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager linearLayoutManager;
     DatabaseReference databaseReference;
-    JSONArray jsonArray;
+    JSONObject jsonObject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("tag","onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.card_grey));
         setSupportActionBar(toolbar);
         names=new ArrayList<>();
         recyclerView=findViewById(R.id.recv_content);
-        //linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
-
-        populate();
         load_data();
-        customAdapter=new CustomAdapter(names);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        //recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(customAdapter);
 
     }
-    public JSONArray createJsonArray(DataSnapshot dataSnapshot){
-        JSONArray jsonArray=new JSONArray();
+    public JSONObject createJsonArray(DataSnapshot dataSnapshot){
+        JSONObject jsonObject=new JSONObject();
         for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-            JSONObject jsonObject=new JSONObject();
+//            JSONObject jsonObject=new JSONObject();
             try {
                 if (snapshot.getChildrenCount() > 0) {
                     jsonObject.put(snapshot.getKey(), createJsonArray(snapshot));
@@ -84,9 +67,10 @@ public class HomeScreen extends AppCompatActivity {
             }catch (Exception e){
 
             }
-            jsonArray.put(jsonObject);
+//            jsonArray.put(jsonObject);
         }
-        return jsonArray;
+        //Log.i("tag",jsonArray.toString());
+        return jsonObject;
 
     }
     public void  load_data(){
@@ -94,11 +78,13 @@ public class HomeScreen extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.i("tag","ONDatachanged");
                 Log.i("tag",String.valueOf(dataSnapshot.getChildrenCount()));
-                jsonArray=createJsonArray(dataSnapshot);
+                jsonObject=createJsonArray(dataSnapshot);
+                populate();
                 try {
-                    Log.i("tag",jsonArray.getJSONObject(0).getString("Point Wise Syllabus"));
-                } catch (JSONException e) {
+                   // Log.i("tag",jsonArray.toString());
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -109,29 +95,24 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        names.clear();
+    }
+
     public void populate(){
-        names.add("ayush");
-        names.add("john");
-        names.add("joe");
-        names.add("james");
-        names.add("wayne");
-        names.add("nike");
-        names.add("rohan");
-        names.add("Harry");
-        names.add("mike");
-        names.add("Wanes");
-        names.add("Cameroon");
-        names.add("Harley");
-        names.add("Nicolas");
-        names.add("Cena");
-        names.add("Randy");
-        names.add("Shawn");
-        names.add("Andersan");
-        names.add("Shames");
-        names.add("Wiki");
-        names.add("Holmes");
-        names.add("Kurt");
-        names.add("Hulk");
+            Iterator<String> iterator=  jsonObject.keys();
+            while (iterator.hasNext()){
+                String key=iterator.next();
+                names.add(key);
+         }
+        customAdapter=new CustomAdapter(names);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        //recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(customAdapter);
+
     }
 
     @Override
