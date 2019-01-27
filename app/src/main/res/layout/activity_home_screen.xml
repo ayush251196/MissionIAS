@@ -21,4 +21,13 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home_screen"
         app:menu="@menu/activity_home_screen_drawer" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/frg"
+            ></FrameLayout>
+    </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

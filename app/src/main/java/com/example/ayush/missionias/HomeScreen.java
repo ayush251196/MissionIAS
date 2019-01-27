@@ -35,7 +35,7 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
     JSONArray jsonArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("tag","onCreate");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
