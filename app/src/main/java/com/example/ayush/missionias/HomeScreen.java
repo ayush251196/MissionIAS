@@ -1,9 +1,12 @@
 package com.example.ayush.missionias;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -27,6 +31,20 @@ import java.util.Iterator;
 
 public class HomeScreen extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     ArrayList<String> names;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("tag","OnPause");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("tag","OnDestroyed");
+    }
+
     CustomAdapter customAdapter;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager linearLayoutManager;
@@ -98,7 +116,8 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
     @Override
     protected void onStop() {
         super.onStop();
-        names.clear();
+        Log.i("tag","OnStopped");
+        //names.clear();
     }
 
     public void populate(){
@@ -107,10 +126,67 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
                 String key=iterator.next();
                 names.add(key);
          }
-        customAdapter=new CustomAdapter(names);
+        customAdapter=new CustomAdapter(names,HomeScreen.this);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         //recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(customAdapter);
+        customAdapter.setOnClickListener(new CustomAdapter.OnItemClickListener() {
+            FragmentManager fragmentManager;
+            FragmentTransaction fragmentTransaction;
+            @Override
+            public int hashCode() {
+                return super.hashCode();
+            }
+
+            @Override
+            public void onItemClick(int pos) {
+              String str=null;
+              Log.i("tag",String.valueOf(pos));
+                try {
+                    str=jsonObject.getString(names.get(pos));
+                    if(jsonObject.get(names.get(pos)).getClass().toString().equals("class java.lang.String")){
+                        //Toast.makeText(HomeScreen.this,str, Toast.LENGTH_SHORT).show();
+                        Uri u=Uri.parse(str);
+                        Intent i=new Intent(Intent.ACTION_VIEW,u);
+                        startActivity(i);
+                    }
+                    else{
+
+                        //Toast.makeText(HomeScreen.this,str,Toast.LENGTH_SHORT).show();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("json",jsonObject.getString(names.get(pos)));
+                        Frame f=new Frame();
+                        f.setArguments(bundle);
+                        fragmentManager= getSupportFragmentManager();
+                        fragmentTransaction=fragmentManager.beginTransaction();
+                        fragmentTransaction.add(R.id.frg,f);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+//                try {
+//                    String str=jsonObject.getString(names.get(pos));
+//                    JSONObject jo=new JSONObject(str);
+//                    //Toast.makeText(HomeScreen.this,String.valueOf(jo.length()),Toast.LENGTH_SHORT).show();
+//                if(String.valueOf(jo.length())==null) {
+//                    Intent i = new Intent();
+//                    i.setAction(Intent.ACTION_VIEW);
+//                    i.setData(Uri.parse(jsonObject.getString(names.get(pos))));
+//                }
+//                    Toast.makeText(HomeScreen.this,jsonObject.toString(), Toast.LENGTH_SHORT).show();
+//
+//
+//
+//                }
+//                catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+            }
+
+        });
 
     }
 

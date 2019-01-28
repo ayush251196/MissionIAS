@@ -22,8 +22,4 @@
 
     <include layout="@layout/content_home_screen" />
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 8748cec6f16bbcae47fd6307c8490f9aff90fac4
 </android.support.design.widget.CoordinatorLayout>
