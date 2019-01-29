@@ -11,6 +11,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
+        android:alpha="0.75"
         android:layout_marginBottom="5dp"
         android:padding="5dp"
         app:cardCornerRadius="10dp"
@@ -26,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="149dp"
                 android:scaleType="centerCrop"
+                android:alpha=".75"
                 android:src="@drawable/card_view_background" />
 
             <TextView

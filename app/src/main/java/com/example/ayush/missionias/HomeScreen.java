@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,6 +51,7 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
     RecyclerView.LayoutManager linearLayoutManager;
     DatabaseReference databaseReference;
     JSONObject jsonObject;
+    FirebaseDatabase firebaseDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -59,6 +61,8 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
         toolbar.setBackgroundColor(getResources().getColor(R.color.card_grey));
         setSupportActionBar(toolbar);
         names=new ArrayList<>();
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
         recyclerView=findViewById(R.id.recv_content);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -91,7 +95,7 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
 
     }
     public void  load_data(){
-        databaseReference=FirebaseDatabase.getInstance().getReference().child("Structure");
+        databaseReference=firebaseDatabase.getReference().child("Structure");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -207,6 +211,7 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show();
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
@@ -217,6 +222,7 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
+            Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show();
             Intent sharingIntent=new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             String shareBody="here is share content";
