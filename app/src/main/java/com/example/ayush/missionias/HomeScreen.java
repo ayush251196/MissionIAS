@@ -83,6 +83,7 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
         load_data();
 
     }
@@ -107,6 +108,7 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
     }
     public void  load_data(){
         databaseReference=firebaseDatabase.getReference().child("Structure");
+        databaseReference.keepSynced(true);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -241,8 +243,6 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
             sharingIntent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here");
             sharingIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
             startActivity(Intent.createChooser(sharingIntent,"Share via"));
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

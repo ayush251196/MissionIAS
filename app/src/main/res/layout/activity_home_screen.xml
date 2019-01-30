@@ -25,7 +25,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home_screen"
-        app:menu="@menu/activity_home_screen_drawer" />
-
+        app:menu="@menu/activity_home_screen_drawer"
+        android:background="@drawable/home_screen_background"/>
 
 </android.support.v4.widget.DrawerLayout>
