@@ -1,5 +1,6 @@
 package com.example.ayush.missionias;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,8 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +36,7 @@ import java.util.Iterator;
 
 public class HomeScreen extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     ArrayList<String> names;
+    TextView txt;
 
     @Override
     protected void onPause() {
@@ -58,11 +63,17 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.card_grey));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.blue));
         setSupportActionBar(toolbar);
+        txt=findViewById(R.id.txt_timer);
+        txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HomeScreen.this,"Clicked!",Toast.LENGTH_SHORT).show();
+            }
+        });
         names=new ArrayList<>();
         firebaseDatabase=FirebaseDatabase.getInstance();
-        firebaseDatabase.setPersistenceEnabled(true);
         recyclerView=findViewById(R.id.recv_content);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -164,6 +175,7 @@ public class HomeScreen extends AppCompatActivity  implements NavigationView.OnN
                         fragmentManager= getSupportFragmentManager();
                         fragmentTransaction=fragmentManager.beginTransaction();
                         fragmentTransaction.add(R.id.frg,f);
+                        fragmentTransaction.setTransitionStyle(Transition.MATCH_INSTANCE);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
                     }
