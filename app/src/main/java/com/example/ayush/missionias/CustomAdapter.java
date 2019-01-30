@@ -43,6 +43,8 @@ public class CustomAdapter extends  RecyclerView.Adapter<CustomAdapter.MyViewHol
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textView=itemView.findViewById(R.id.txt_name);
+
         }
     }
+
 }
