@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom"
-                android:background="#FFC4BDC5"
+                android:background="@color/card_grey"
                 android:fontFamily="@font/orbitron_medium"
                 android:gravity="center"
                 android:minHeight="0dp"
