@@ -12,12 +12,16 @@
 
     <TextView
         android:id="@+id/txt_timer"
-        android:layout_width="match_parent"
-        android:layout_height="69dp"
+        android:layout_width="173dp"
+        android:layout_height="61dp"
+        android:layout_gravity="center"
+        android:background="@drawable/textview_border"
+        android:elevation="5dp"
+        android:fontFamily="@font/orbitron_medium"
         android:gravity="center"
-        android:text="Timer"
+        android:text="Time Left !"
         android:textColor="@android:color/background_light"
-        android:textSize="30sp" />
+        android:textSize="24sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recv_content"
